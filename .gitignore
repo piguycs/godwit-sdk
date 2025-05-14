@@ -1,0 +1,9 @@
+# the build dir I use by default
+build/
+# the build dir that meson's examples include
+builddir/
+
+.cache/
+
+# not everyone wants clangd
+compile_commands.json
