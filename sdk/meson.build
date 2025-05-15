@@ -1,8 +1,14 @@
 source_files = [
-    'godwit.cpp'
+    'src/godwit.cpp',
+    'src/util.cpp',
 ]
 
-_sdk_headers = include_directories('include')
+deps = [
+    dependency('raylib'),
+    dependency('boost'),
+]
+
+_sdk_headers = include_directories('.')
 _sdk_lib = static_library('sdk', source_files,
     include_directories: _sdk_headers,
     install: false,
@@ -11,4 +17,5 @@ _sdk_lib = static_library('sdk', source_files,
 sdk_dep = declare_dependency(
     link_with: _sdk_lib,
     include_directories: _sdk_headers,
+    dependencies: deps,
 )

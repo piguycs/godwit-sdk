@@ -3,4 +3,4 @@ project('gamesdk', 'cpp',
 )
 
 subdir('sdk')
-subdir('game/game1')
+subdir('games/game1')

@@ -1,4 +1,4 @@
-headers = include_directories('.')
+headers = include_directories('include/')
 
 executable('game1', 'main.cpp',
     dependencies: sdk_dep,
