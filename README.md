@@ -2,22 +2,31 @@
 This is a game development SDK/Framework that I will personally be using to make a mix of 2D and 3D games.
 
 ## Getting started
+This project uses C++11 along with Meson to compile everything. Clang is recommended.
 
-To build and run this project, you will need `meson`.
+### Dependencies
+This project depends on `raylib` and `boost`. Be sure to have these libraries installed locally.
 
+### Compiling on Linux
 ```shell
 meson setup build
-cd build
-meson compile
-# the example games bundled with this repo are under `./games/`
+meson compile -C build
 # lets run Game1
-./games/game1/game1
+./build/games/game1/game1
 ```
+
+### Compiling on Windows
+(TODO: build and run this on a borrowed Windows laptop and publish build instructions)
+
+## Additional info
 
 ## Core concepts
 Still working on these as I go:
 - Memory allocations are preferably done via an Arena allocator.
 - Levels are initialised with on_load and on_update functions, sort of like Unity.
+
+## What games are included
+Just simple examples in the `./games/` folder.
 
 ## Who is this for?
 For me, but you can use it too :)
