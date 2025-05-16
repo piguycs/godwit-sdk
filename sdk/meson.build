@@ -1,6 +1,5 @@
 source_files = [
     'src/godwit.cpp',
-    'src/util.cpp',
 ]
 
 deps = [
