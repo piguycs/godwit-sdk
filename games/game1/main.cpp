@@ -1,5 +1,5 @@
 #include <iostream>
-#include <godwit/godwit.hpp>
+#include <godwit.hpp>
 #include <raylib.h>
 #include "main.h"
 

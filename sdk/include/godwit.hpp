@@ -1,11 +1,10 @@
 #pragma once
+
 // TODO: change naming convention from Rust's to C++'s
 #include <boost/optional.hpp>
-#include <functional>
+#include "godwit/types.hpp"
 
 extern const char* GODWIT_SDK_VERSION;
-
-typedef std::function<void()> LevelCB;
 
 struct LevelConfig {
     int window_height = 450;

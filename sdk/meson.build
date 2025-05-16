@@ -1,5 +1,6 @@
 source_files = [
     'src/godwit.cpp',
+    'src/event_handler.cpp',
 ]
 
 deps = [
@@ -7,7 +8,7 @@ deps = [
     dependency('boost'),
 ]
 
-_sdk_headers = include_directories('.')
+_sdk_headers = include_directories('include')
 _sdk_lib = static_library('sdk', source_files,
     include_directories: _sdk_headers,
     install: false,
