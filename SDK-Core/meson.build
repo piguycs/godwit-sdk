@@ -7,8 +7,12 @@ deps = [
     raylib_dep,
 ]
 
-_sdk_headers = include_directories('include')
+_sdk_headers = [
+    include_directories('include'),
+]
+
 _sdk_lib = static_library('sdk', sdk_core_src,
+    dependencies: deps,
     include_directories: _sdk_headers,
     install: false,
 )
