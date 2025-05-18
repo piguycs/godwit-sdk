@@ -2,10 +2,10 @@
 This is a game development SDK/Framework that I will personally be using to make a mix of 2D and 3D games.
 
 ## Getting started
-This project uses C++11 along with Meson to compile everything. Clang is recommended.
+This project uses C++17 along with Meson to compile everything. Clang is recommended.
 
 ### Dependencies
-This project depends on `raylib` and `boost`. Be sure to have these libraries installed locally.
+This project depends on `raylib`. Be sure to have these libraries installed locally.
 
 ### Compiling on Linux
 ```shell
