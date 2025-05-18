@@ -56,11 +56,11 @@ jobs:
 
     - name: Copy ELF binary (Linux)
       if: matrix.os == 'ubuntu-latest'
-      run: cp build/games/game1/game1 artifact/
+      run: cp build/Games/game1/game1 artifact/
 
     - name: Copy Executable (Windows)
       if: matrix.os == 'windows-latest'
-      run: cp build/games/game1/game1.exe artifact/
+      run: cp build/Games/game1/game1.exe artifact/
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
