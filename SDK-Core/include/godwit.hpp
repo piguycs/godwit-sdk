@@ -1,7 +1,9 @@
 #pragma once
 
 // TODO: change naming convention from Rust's to C++'s
-#include <boost/optional.hpp>
+
+#include <optional>
+#include <string>
 #include "godwit/types.hpp"
 
 extern const char* GODWIT_SDK_VERSION;
@@ -23,7 +25,7 @@ class Level {
 public: /* static functions */
     /// Initialise a level with this function. The Constructor for this class is
     /// private.
-    static boost::optional<Level> init(
+    static std::optional<Level> init(
         std::string& name,
         LevelCB on_start,
         LevelCB on_update,

@@ -3,17 +3,17 @@
 
 const char* GODWIT_SDK_VERSION = "2025_05_001";
 
-boost::optional<Level> Level::init(
+std::optional<Level> Level::init(
         std::string& name,
         LevelCB on_start,
         LevelCB on_update,
         LevelCB cleanup,
         LevelConfig level_config
 ) {
-    if (name.length() <= 0) return boost::none;
-    if (on_start == nullptr) return boost::none;
-    if (on_update == nullptr) return boost::none;
-    if (cleanup == nullptr) return boost::none;
+    if (name.length() <= 0) return std::nullopt;
+    if (on_start == nullptr) return std::nullopt;
+    if (on_update == nullptr) return std::nullopt;
+    if (cleanup == nullptr) return std::nullopt;
 
     InitWindow(
         level_config.window_width,
