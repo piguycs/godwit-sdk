@@ -2,21 +2,31 @@
 This is a game development SDK/Framework that I will personally be using to make a mix of 2D and 3D games.
 
 ## Getting started
-This project uses C++17 along with Meson to compile everything. Clang is recommended.
+This project uses C++17 along with Meson to compile everything.
+
+If you want to just test out the games, pre-built binaries are available via our CI/CD pipeline. You can download the latest binaries from [nightly.link](https://nightly.link/piguycs/godwit-sdk/workflows/build/main).
 
 ### Dependencies
-This project depends on `raylib`. Be sure to have these libraries installed locally.
+This project depends on `raylib`. The dependency is vendored using [git submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules). You do not need to have it installed locally for this project to compile.
 
-### Compiling on Linux
+### Compiling
 ```shell
 meson setup build
 meson compile -C build
-# lets run Game1
-./build/games/game1/game1
 ```
 
-### Compiling on Windows
-(TODO: build and run this on a borrowed Windows laptop and publish build instructions)
+### Running
+
+The games will all be in the `build/Games` directory.
+```shell
+$ ls build/Games
+game1
+$ # game1 is the directory containing the binary for Games/game1
+$ ls build/Games/game1
+game1  game1.p
+$ # game1 is the binary and game1.p is a directory with .o files
+$ ./build/Games/game1/game1
+```
 
 ## Additional info
 
@@ -26,7 +36,7 @@ Still working on these as I go:
 - Levels are initialised with on_load and on_update functions, sort of like Unity.
 
 ## What games are included
-Just simple examples in the `./games/` folder.
+Just simple examples in the `./Games/` folder.
 
 ## Who is this for?
 For me, but you can use it too :)

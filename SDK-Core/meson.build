@@ -1,7 +1,5 @@
-sdk_core_src = [
-    'src/godwit.cpp',
-    'src/event_handler.cpp',
-]
+globber = run_command('sh', '-c', 'find . -name "*.cpp" | sort', check: true)
+sdk_core_src = globber.stdout().strip().split('\n')
 
 deps = [
     raylib_dep,
@@ -14,7 +12,7 @@ _sdk_headers = [
 _sdk_lib = static_library('sdk', sdk_core_src,
     dependencies: deps,
     include_directories: _sdk_headers,
-    install: false,
+    install: true,
 )
 
 sdk_core_dep = declare_dependency(
