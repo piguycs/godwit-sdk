@@ -56,3 +56,21 @@ private: /* private constructor */
         LevelConfig level_config
     );
 };
+
+
+// --- special glue for making this game work with Windows' archiac "subsystem" model
+#ifdef _WIN32
+#include <windows.h>
+#include <main.h>
+#define WIN32_GLUE(main) \
+    int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) { \
+        (void)hInstance; \
+        (void)hPrevInstance; \
+        (void)lpCmdLine; \
+        (void)nCmdShow; \
+        return main(); \
+    }
+#else
+#define WIN32_GLUE(main) \
+    // --- we do nothing here ---
+#endif

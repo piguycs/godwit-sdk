@@ -34,3 +34,5 @@ void on_update() {
 void cleanup() {
     std::cout << "Goodbye!" << std::endl;
 }
+
+WIN32_GLUE(main)
