@@ -1,6 +1,7 @@
-simulation_headers = include_directories('include/')
+simulation_headers = include_directories('./')
 simulation_src = [
     'src/main.cpp',
+    'src/grid.cpp',
 ]
 
 executable('simulation', simulation_src,
