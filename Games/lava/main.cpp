@@ -86,4 +86,4 @@ int main() {
     return EXIT_SUCCESS;
 }
 
-WIN32_GLUE(main)
+// WIN32_GLUE(main)
