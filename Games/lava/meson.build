@@ -2,6 +2,7 @@ headers = include_directories('include/')
 
 game1_src = [
     'main.cpp',
+    'camera.cpp',
 ]
 
 executable('lava', game1_src,
