@@ -1,4 +1,4 @@
-name: Building Game1 for Windows and Linux
+name: Building Cellular Automata for Windows and Linux
 
 on:
   push:
@@ -13,9 +13,9 @@ jobs:
         os: [ubuntu-latest, windows-latest]
         include:
           - os: ubuntu-latest
-            artifact_name: game1-linux
+            artifact_name: lava-linux
           - os: windows-latest
-            artifact_name: game1-windows
+            artifact_name: lava-windows
 
     runs-on: ${{ matrix.os }}
 
@@ -56,11 +56,11 @@ jobs:
 
     - name: Copy ELF binary (Linux)
       if: matrix.os == 'ubuntu-latest'
-      run: cp build/Games/game1/game1 artifact/
+      run: cp build/Games/lava/lava artifact/
 
     - name: Copy Executable (Windows)
       if: matrix.os == 'windows-latest'
-      run: cp build/Games/game1/game1.exe artifact/
+      run: cp build/Games/lava/lava.exe artifact/
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
