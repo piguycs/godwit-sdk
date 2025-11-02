@@ -9,17 +9,38 @@ void CellGrid::step(int size, SimRule rule) {
         const Cell& cell = at(x,y,z);
         int neighbours = count_alive_neighbours(x, y, z);
 
-        if (cell.life == Alive && neighbours == rule.remain_alive_threshold) {
-            // it stays alive
-        } else if (cell.life == Dead && neighbours == rule.birth_threshold) {
-            update_queue.push_back({x,y,z,Alive});
-        } else {
-            update_queue.push_back({x,y,z,Dead});
+        switch (cell.life) {
+            case Alive:
+                if (neighbours != rule.remain_alive_threshold) {
+                    // start the decay process for this cell
+                    update_queue.push_back({x, y, z, Decaying});
+                }
+                break;
+            case Dead:
+                if (neighbours == rule.birth_threshold) {
+                    update_queue.push_back({x, y, z, Alive});
+                }
+                break;
+            case Decaying:
+                update_queue.push_back({x, y, z, Decaying});
+                break;
         }
     }
 
     for (auto update : update_queue) {
-        set_life_at(update.x, update.y, update.z, update.alive);
+        Cell& cell = at_mut(update.x, update.y, update.z);
+        if (update.alive == Alive) {
+            cell.life = Alive;
+            cell.decay = 0;
+        } else if (update.alive == Decaying) {
+            if (cell.life != Decaying) {
+                cell.life = Decaying;
+                cell.decay = rule.decay_start_value;
+            } else {
+                if (cell.decay > 0) cell.decay -= 1;
+                if (cell.decay == 0) cell.life = Dead;
+            }
+        }
     }
 }
 

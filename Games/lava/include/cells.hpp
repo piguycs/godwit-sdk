@@ -8,7 +8,7 @@
 enum Life {
     Dead,
     Alive,
-    StartedDecay,
+    Decaying,
 };
 
 struct Update {

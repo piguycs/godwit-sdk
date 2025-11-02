@@ -18,7 +18,7 @@ GameState on_start() {
 
     std::mt19937 rng(42); // fixed seed
     std::uniform_real_distribution<float> dist(0.f, 1.f);
-    constexpr float alive_percent = 0.017f;
+    constexpr float alive_percent = 0.05f;
 
     auto grid = CellGrid::init(GRID_SIZE);
 
@@ -37,6 +37,8 @@ GameState on_start() {
 void draw(const Cell& cell, std::uint32_t x, std::uint32_t y, std::uint32_t z) {
     if (cell.life == Alive) {
         DrawCube({(float)x, (float)y, (float)z}, 1.f, 1.f, 1.f, BLUE);
+    } else if (cell.life == Decaying) {
+        DrawCube({(float)x, (float)y, (float)z}, 1.f, 1.f, 1.f, ORANGE);
     }
 }
 
