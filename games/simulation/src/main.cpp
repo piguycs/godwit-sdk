@@ -1,30 +1,25 @@
 #include "engine/engine.h"
-#include <cstdio>
-
-struct Score {
-    int value = 0;
-    Score(int value): value(value) {}
-};
-
-struct PlayerId {
-    int id = 10;
-};
-
-void printScore(Score& score, PlayerId& id) {
-    printf("THE SCORE FOR %d IS: %d\n", id.id, score.value);
-    score.value += 10;
-}
+#include "grid.hpp"
+#include "rules.hpp"
 
 void renderFps() { raylib::DrawFPS(10, 10); }
+
+void stepGridSystem(Grid& grid, const SimRules& rules) {
+    grid.step(rules);
+}
+
+void drawGrid(const Grid&) {
+    // TODO
+}
 
 int main() {
     engine::Engine engine;
 
-    engine.registerResource<Score>(10);
-    engine.registerResource<PlayerId>();
+    engine.registerResource<Grid>();
+    engine.registerResource<SimRules>();
 
     engine.addSystem(renderFps);
-    engine.addSystem(printScore);
+    engine.addSystem(drawGrid);
 
     engine.start();
 }
