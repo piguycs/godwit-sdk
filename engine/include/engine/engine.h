@@ -1,7 +1,11 @@
 #pragma once
 
 #include "engine/resource.h"
+
+namespace raylib {
 #include <raylib.h>
+}
+
 
 namespace engine {
 
@@ -12,6 +16,17 @@ public:
     ~Engine() = default;
 
     void start() {
+        raylib::InitWindow(800, 450, "Godwit SDK (ECS) game");
+        raylib::SetTargetFPS(60);
+
+        while (!raylib::WindowShouldClose()) {
+            raylib::BeginDrawing();
+            raylib::ClearBackground(raylib::RAYWHITE);
+            resourceManager.runAllSystemsOnce();
+            raylib::EndDrawing();
+        }
+
+        raylib::CloseWindow();
     }
 
     template<typename T, typename... Args>

@@ -48,7 +48,7 @@ public:
         systems.push_back(system_wrapper);
     }
 
-    void runSystemsOnce() {
+    void runAllSystemsOnce() {
         for (auto& system : systems) {
             system();
         }

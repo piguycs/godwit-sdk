@@ -14,9 +14,8 @@ void printScore(Score& score) {
 int main() {
     engine::Engine engine;
 
-    engine.resourceManager.registerResource<Score>(10);
-    engine.resourceManager.addSystem(printScore);
+    engine.registerResource<Score>(10);
+    engine.addSystem(printScore);
 
-    // run the engine for 2 ticks
     engine.start();
 }
