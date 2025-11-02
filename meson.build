@@ -25,3 +25,6 @@ _raylib_proj = cmake.subproject('raylib', options: _raylib_opts)
 
 # the raylib dependency that our code can depend on
 raylib_dep = _raylib_proj.dependency('raylib')
+
+subdir('engine')
+subdir('games/simulation')
