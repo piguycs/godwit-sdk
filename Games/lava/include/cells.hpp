@@ -3,29 +3,40 @@
 #include <cstdint>
 #include <stdexcept>
 #include <vector>
+#include "simrule.hpp"
 
-struct Cell {
-    std::uint32_t state = 10;
-    bool alive;
+enum Life {
+    Dead,
+    Alive,
+    StartedDecay,
 };
 
-struct CellGrid {
+struct Update {
+    std::uint32_t x, y, z;
+    Life alive;
+};
+
+struct Cell {
+    std::uint32_t decay = 10;
+    Life life;
+};
+
+class CellGrid {
     std::vector<Cell> cells;
+
+    std::vector<Update> update_queue;
 
     std::uint32_t width;
     std::uint32_t height;
     std::uint32_t depth;
 
 public:
-    static CellGrid init(std::uint32_t width, std::uint32_t height, std::uint32_t depth) {
-        std::vector<Cell> cells;
-        // fill the vector with default values
-        cells.resize(width * height * depth);
-        return CellGrid{ cells, width, height, depth };
+    static CellGrid init(std::uint32_t size) {
+        return CellGrid(size);
     }
 
     const Cell& at(std::uint32_t x, std::uint32_t y, std::uint32_t z) const {
-        static const Cell dead_cell{0,false};
+        static const Cell dead_cell{0,Dead};
         if (x >= width || y >= height || z >= depth) {
             // anything outside the grid is dead
             return dead_cell;
@@ -34,37 +45,23 @@ public:
         return cells[x + y * width + z * width * height];
     }
 
-    void set_alive_at(std::uint32_t x, std::uint32_t y, std::uint32_t z, bool alive) {
+    void set_life_at(std::uint32_t x, std::uint32_t y, std::uint32_t z, Life life) { at_mut(x,y,z).life = life; }
+    void set_decay_at(std::uint32_t x, std::uint32_t y, std::uint32_t z, std::uint32_t decay) { at_mut(x,y,z).decay = decay; }
+
+    int count_alive_neighbours(std::uint32_t x, std::uint32_t y, std::uint32_t z) const; 
+    void step(int size, SimRule rule);
+
+private:
+    Cell& at_mut(std::uint32_t x, std::uint32_t y, std::uint32_t z) {
         if (x >= width || y >= height || z >= depth) {
             throw std::out_of_range("CellGrid::at");
         }
         
-        cells[x + y * width + z * width * height].alive = alive;
+        return cells[x + y * width + z * width * height];
     }
 
-    void set_state_at(std::uint32_t x, std::uint32_t y, std::uint32_t z, std::uint32_t state) {
-        if (x >= width || y >= height || z >= depth) {
-            throw std::out_of_range("CellGrid::at");
-        }
-        
-        cells[x + y * width + z * width * height].state = state;
-    }
-
-    int count_alive_neighbours(std::uint32_t x, std::uint32_t y, std::uint32_t z) const {
-        int count = 0;
-        for (int dx = -1; dx <= 1; ++dx) {
-            for (int dy = -1; dy <= 1; ++dy) {
-                for (int dz = -1; dz <= 1; ++dz) {
-                    if (dx == 0 && dy == 0 && dz == 0) continue;
-                    if (dx == 0 && dy == 0 && dz == 0) continue;
-                    count += at(x + dx, y + dy, z + dz).alive;
-                }
-            }
-        }
-        
-        return count;
-    }
-
-    void step() {
+    CellGrid(std::uint32_t size): width(size), height(size), depth(size) {
+        cells.resize(width * height * depth);
+        update_queue.resize(width * height * depth);
     }
 };
