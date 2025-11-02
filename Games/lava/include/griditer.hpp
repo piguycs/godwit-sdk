@@ -3,6 +3,18 @@
 #include <cstdint>
 #include <tuple>
 
+/*!
+* Iterate over x-y-z coordinates within the given width/height/depth parameters
+*
+* \code
+* for (auto [x,y,z] : XYZRange(WIDTH, HEIGHT, DEPTH)) {
+*     if (dist(rng) < alive_percent) {
+*         grid.set_alive_at(x, y, z, true);
+*     }
+* }
+* \endcode
+* 
+*/
 struct XYZIterator {
     std::uint32_t width, height, depth;
     std::uint32_t x=0, y=0, z=0;

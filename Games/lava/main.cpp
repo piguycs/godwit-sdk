@@ -1,9 +1,9 @@
-#include <iostream>
 #include <godwit.hpp>
-#include <raylib.h>
+#include <iostream>
 #include <random>
+#include <raylib.h>
+#include "griditer.hpp"
 #include "cells.hpp"
-#include "celliter.hpp"
 
 const int HEIGHT = 50;
 const int WIDTH = 50;
