@@ -87,7 +87,6 @@ private: /* private constructor */
 // --- special glue for making this game work with Windows' archiac "subsystem" model
 #ifdef _WIN32
 #include <windows.h>
-#include <main.h>
 #define WIN32_GLUE(main) \
     int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) { \
         (void)hInstance; \
