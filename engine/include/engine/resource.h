@@ -22,6 +22,10 @@ namespace engine {
 
 class ResourceManager {
     std::unordered_map<std::type_index, std::any> resources;
+    // TODO: maybe store some more metadata, to differenciate between:
+    // - systems which dont deal with rendering
+    // - systems which deal with 2D rendering
+    // - systems which deal with 3D rendering
     std::vector<std::function<void()>> systems;
 
 public:
@@ -48,7 +52,14 @@ public:
         systems.push_back(system_wrapper);
     }
 
-    void runAllSystemsOnce() {
+    void runOtherSystemsOnce() {
+        for (auto& system : systems) {
+            system();
+        }
+    }
+
+    /// These systems are meant to be ran within the raylib render context
+    void runRenderSystemsOnce() {
         for (auto& system : systems) {
             system();
         }

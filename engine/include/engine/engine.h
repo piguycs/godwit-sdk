@@ -20,9 +20,9 @@ public:
         raylib::SetTargetFPS(60);
 
         while (!raylib::WindowShouldClose()) {
+            resourceManager.runOtherSystemsOnce();
+
             raylib::BeginDrawing();
-            raylib::ClearBackground(raylib::RAYWHITE);
-            resourceManager.runAllSystemsOnce();
             raylib::EndDrawing();
         }
 
