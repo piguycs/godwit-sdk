@@ -13,7 +13,7 @@ Camera::Camera(int grid_size, float radius)
     camera.target = {target, target, target};
     camera.up = {0,1,0};
     camera.fovy = DEFAULT_FOVY;
-    camera.projection = CAMERA_PERSPECTIVE;
+    camera.projection = raylib::CAMERA_PERSPECTIVE;
 }
 
 }

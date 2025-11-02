@@ -1,6 +1,5 @@
 #pragma once
 
-#include <raylib.h>
 #include "cells.hpp"
 #include "simrule.hpp"
 #include "camera.hpp"

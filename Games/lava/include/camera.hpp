@@ -1,7 +1,7 @@
 #pragma once
 
 #include <cmath>
-#include "raylib.h"
+#include <rl.h>
 
 // namespace here so that we dont clash with raylib's camera
 namespace lava {
@@ -9,13 +9,13 @@ namespace lava {
 const float DEFAULT_FOVY = 60.0f;
 
 class Camera {
-    Camera3D camera;
+    raylib::Camera3D camera;
     float radius;
     float cam_angle;
 
 public:
     Camera(int grid_size, float radius);
-    Camera3D& rlCam3d() { return camera; }
+    raylib::Camera3D& rlCam3d() { return camera; }
 
     float rotate(float rotation_speed, int grid_size) {
         cam_angle += rotation_speed;

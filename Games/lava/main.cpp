@@ -2,7 +2,6 @@
 #include <godwit/drawmode.hpp>
 #include <iostream>
 #include <random>
-#include <raylib.h>
 #include "griditer.hpp"
 #include "state.hpp"
 
@@ -36,18 +35,18 @@ GameState on_start() {
 
 void draw(const Cell& cell, std::uint32_t x, std::uint32_t y, std::uint32_t z) {
     if (cell.life == Alive) {
-        DrawCube({(float)x, (float)y, (float)z}, 1.f, 1.f, 1.f, BLUE);
+        raylib::DrawCube({(float)x, (float)y, (float)z}, 1.f, 1.f, 1.f, raylib::BLUE);
     } else if (cell.life == Decaying) {
-        DrawCube({(float)x, (float)y, (float)z}, 1.f, 1.f, 1.f, ORANGE);
+        raylib::DrawCube({(float)x, (float)y, (float)z}, 1.f, 1.f, 1.f, raylib::ORANGE);
     }
 }
 
 void on_update(GameState& state) {
     state.camera.rotate(ROTATION_SPEED, GRID_SIZE);
     
-    BeginDrawing();
+    raylib::BeginDrawing();
 
-    ClearBackground(BLACK);
+    ClearBackground(raylib::BLACK);
 
     {
         DrawHandle3D handle(state.camera.rlCam3d());
@@ -61,9 +60,9 @@ void on_update(GameState& state) {
     // it might be more efficient to add a draw callback, and then move this call up in the draw loop
     state.grid.step(GRID_SIZE, state.rule);
 
-    DrawFPS(10,10);
+    raylib::DrawFPS(10,10);
 
-    EndDrawing();
+    raylib::EndDrawing();
 }
 
 void cleanup() {

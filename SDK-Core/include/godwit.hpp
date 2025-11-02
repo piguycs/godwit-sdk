@@ -4,7 +4,7 @@
 
 #include <optional>
 #include <string>
-#include <raylib.h>
+#include <rl.h>
 #include <functional>
 
 extern const char* GODWIT_SDK_VERSION;
@@ -39,12 +39,12 @@ public: /* static functions */
         if (on_update == nullptr) return std::nullopt;
         if (cleanup == nullptr) return std::nullopt;
 
-        InitWindow(
+        raylib::InitWindow(
             level_config.window_width,
             level_config.window_height,
             level_config.title.c_str()
         );
-        SetTargetFPS(level_config.preferred_fps);
+        raylib::SetTargetFPS(level_config.preferred_fps);
 
         Level level(name, on_start, on_update, cleanup, level_config);
         return level;
@@ -54,7 +54,7 @@ public: /* public methods */
     void start_loop_blocking() {
         TLevelState state = this->m_onStart();
 
-        while (!WindowShouldClose()) {
+        while (!raylib::WindowShouldClose()) {
             this->m_onUpdate(state);
         }
 
