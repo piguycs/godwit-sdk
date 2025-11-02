@@ -4,7 +4,7 @@ game1_src = [
     'main.cpp',
 ]
 
-executable('game1', game1_src,
+executable('lava', game1_src,
     dependencies: sdk_core_dep,
     include_directories: headers,
     install: true,

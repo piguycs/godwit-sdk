@@ -27,4 +27,4 @@ _raylib_proj = cmake.subproject('raylib', options: _raylib_opts)
 raylib_dep = _raylib_proj.dependency('raylib')
 
 subdir('SDK-Core')
-subdir('Games/game1')
+subdir('Games/lava')
