@@ -2,11 +2,6 @@
 
 #include "engine/resource.h"
 
-namespace raylib {
-#include <raylib.h>
-}
-
-
 namespace engine {
 
 class Engine {
@@ -15,19 +10,7 @@ public:
     Engine() = default;
     ~Engine() = default;
 
-    void start() {
-        raylib::InitWindow(800, 450, "Godwit SDK (ECS) game");
-        raylib::SetTargetFPS(60);
-
-        while (!raylib::WindowShouldClose()) {
-            resourceManager.runOtherSystemsOnce();
-
-            raylib::BeginDrawing();
-            raylib::EndDrawing();
-        }
-
-        raylib::CloseWindow();
-    }
+    void start();
 
     template<typename T, typename... Args>
     void registerResource(Args&&... args) {

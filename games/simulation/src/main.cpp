@@ -1,8 +1,9 @@
 #include "engine/engine.h"
+#include "engine/raylib.h"
 #include "grid.hpp"
 #include "rules.hpp"
 
-void renderFps() { raylib::DrawFPS(10, 10); }
+void renderFps(raylib::RenderCtx2D& ctx) { ctx.DrawFPS(10, 10); }
 
 void stepGridSystem(Grid& grid, const SimRules& rules) {
     grid.step(rules);
