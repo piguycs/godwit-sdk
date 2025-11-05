@@ -20,6 +20,13 @@ struct FunctionTraits<ReturnType(*)(Args...)> {
 
 namespace engine {
 
+/*!
+ * The resource manager is the core of our ECS
+ *
+ * Register resources, which are indexed using their type ID. If multiple
+ * resources share the same type (eg int p1Score and int p2Score), encapsulate
+ * them in different structs. (struct P1{int score;}; struct P2{int score;};)
+*/
 class ResourceManager {
     std::unordered_map<std::type_index, std::any> resources;
     std::vector<std::function<void()>> systems;
