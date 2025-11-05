@@ -2,6 +2,30 @@
 
 namespace engine {
 
+/*!
+* Red Green Blue colours
+*/
+struct RGB{int r,g,b;};
+
+/*!
+* Represent coordinates on a 2 dimensional
+*/
+struct Position2D {float x, y;};
+
+/*!
+* Represent coordinates on a 3 dimensional
+*/
+struct Position3D {
+    float x, y, z;
+    Position3D(float x, float y, float z) : x(x), y(y), z(z) {}
+};
+
+struct Scale{
+    float width, height, depth;
+    Scale(float width, float height, float depth)
+        : width(width), height(height), depth(depth) {}
+};
+
 class IRenderable2D {
 public:
     virtual void renderFunction() = 0;
@@ -15,21 +39,18 @@ public:
 };
 
 class CubeRender: public IRenderable3D {
-    float width, height, depth;
-    float x, y, z;
-    // TODO: color without exposing raylib.h
+    Scale scale;
+    Position3D position;
+    RGB colour;
 public:
-    CubeRender(float width, float height, float depth, float x, float y, float z)
-        : width(width), height(height), depth(depth), x(x), y(y), z(z)
-    {
-    }
+    CubeRender(Scale scale, Position3D position, RGB colour)
+        : scale(scale), position(position), colour(colour) {}
 
     void renderFunction() override;
 };
 
 class FpsRender: public IRenderable2D {
-    int x;
-    int y;
+    int x, y;
 
 public:
     FpsRender(int x, int y): x(x), y(y) {}
@@ -37,6 +58,7 @@ public:
 };
 
 class ClearBackgroundRender: public IRenderable2D {
+    int r, g, b;
 public:
     ClearBackgroundRender() {}
     void renderFunction() override;

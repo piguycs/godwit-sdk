@@ -1,7 +1,11 @@
 #pragma once
 
 #include "src/rules.hpp"
-#include <vector>
+#include <optional>
+#include <tl/expected.hpp>
+
+const int GRID_SIZE = 50;
+const int GRID_SIZE_3D = GRID_SIZE * GRID_SIZE * GRID_SIZE;
 
 enum LifeState {
     Dead,
@@ -10,12 +14,18 @@ enum LifeState {
 };
 
 struct Cell {
-    LifeState life;
-    int decay;
+    LifeState life = Dead;
+    int decay = 0;
 };
 
 class Grid {
-    std::vector<Cell> cells;
+    std::array<Cell, GRID_SIZE_3D> cells;
+
+    std::optional<Cell> at_mut(int x, int y, int z) const;
+    
 public:
+    Grid();
+    
+    const Cell& at(int x, int y, int z) const;
     void step(const SimRules&);
 };

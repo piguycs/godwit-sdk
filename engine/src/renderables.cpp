@@ -8,7 +8,7 @@ void FpsRender::renderFunction() {
 }
 
 void ClearBackgroundRender::renderFunction() {
-    ClearBackground(RAYWHITE);
+    ClearBackground(Color{130, 130, 252, 255});
 }
 
 void CubeRender::renderFunction() {
