@@ -5,39 +5,43 @@
 
 struct XYZIterator {
     std::uint32_t width, height, depth;
-    std::uint32_t x=0, y=0, z=0;
+    std::uint32_t x = 0, y = 0, z = 0;
 
-    XYZIterator(std::uint32_t w, std::uint32_t h, std::uint32_t d, std::uint32_t start_z=0) : 
-        width(w), height(h), depth(d), z(start_z) {}
+    XYZIterator(std::uint32_t w, std::uint32_t h, std::uint32_t d, std::uint32_t start_z = 0)
+        : width(w), height(h), depth(d), z(start_z) {}
 
-    XYZIterator(std::uint32_t size, std::uint32_t start_z=0) : 
-        width(size), height(size), depth(size), z(start_z) {}
+    XYZIterator(std::uint32_t size, std::uint32_t start_z = 0)
+        : width(size), height(size), depth(size), z(start_z) {}
 
-    bool operator!=(const XYZIterator& other) const {
-        return z != other.z;
-    }
+    bool operator!=(const XYZIterator& other) const { return z != other.z; }
 
     void operator++() {
         x++;
-        if (x >= width) { x = 0; y++; }
-        if (y >= height) { y = 0; z++; }
+        if (x >= width) {
+            x = 0;
+            y++;
+        }
+        if (y >= height) {
+            y = 0;
+            z++;
+        }
     }
 
-    std::tuple<std::uint32_t,std::uint32_t,std::uint32_t> operator*() const { return {x,y,z}; }
+    std::tuple<std::uint32_t, std::uint32_t, std::uint32_t> operator*() const { return {x, y, z}; }
 };
 
 /*!
-* Iterate over x-y-z coordinates within the given width/height/depth parameters
-*
-* \code
-* for (auto [x,y,z] : XYZRange(WIDTH, HEIGHT, DEPTH)) {
-*     if (dist(rng) < alive_percent) {
-*         grid.set_alive_at(x, y, z, true);
-*     }
-* }
-* \endcode
-* 
-*/
+ * Iterate over x-y-z coordinates within the given width/height/depth parameters
+ *
+ * \code
+ * for (auto [x,y,z] : XYZRange(WIDTH, HEIGHT, DEPTH)) {
+ *     if (dist(rng) < alive_percent) {
+ *         grid.set_alive_at(x, y, z, true);
+ *     }
+ * }
+ * \endcode
+ *
+ */
 struct XYZRange {
     std::uint32_t width, height, depth;
 

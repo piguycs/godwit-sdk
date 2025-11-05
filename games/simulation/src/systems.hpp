@@ -1,9 +1,9 @@
 #pragma once
 
-#include <engine/engine.h>
 #include <engine/camera.h>
-#include "grid.hpp"
+#include <engine/engine.h>
 
+#include "grid.hpp"
 
 // some other colour that I was trying
 // engine::RGB decayingColour = {137, 252, 131};
@@ -11,7 +11,7 @@
 struct Config {
     bool renderFps = true;
 
-    engine::RGB backgroundColour = {0,0,0};
+    engine::RGB backgroundColour = {0, 0, 0};
     engine::RGB aliveColour = {0, 121, 241};
     engine::RGB decayingColour = {255, 161, 0};
     // colour for the bounding box surrounding the simulation

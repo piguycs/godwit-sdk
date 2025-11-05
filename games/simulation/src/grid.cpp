@@ -1,18 +1,20 @@
 #include "grid.hpp"
-#include "src/griditer.hpp"
+
 #include <random>
 #include <stdexcept>
+
+#include "src/griditer.hpp"
 
 static Cell EMPTY_CELL = {Dead, 0};
 
 Grid::Grid() {
-    std::mt19937 rng(42); // fixed seed
+    std::mt19937 rng(42);  // fixed seed
     std::uniform_real_distribution<float> dist(0.f, 1.f);
     constexpr float alive_percent = 0.05f;
 
-    for (auto [x,y,z] : XYZRange(GRID_SIZE)) {
+    for (auto [x, y, z] : XYZRange(GRID_SIZE)) {
         Cell& cell = at_mut(x, y, z);
-        
+
         if (dist(rng) < alive_percent) {
             cell.life = Alive;
             cell.decay = 0;
@@ -23,7 +25,7 @@ Grid::Grid() {
 void Grid::step(const SimRules& rule) {
     updateQueue.clear();
 
-    for (auto [x,y,z] : XYZRange(GRID_SIZE)) {
+    for (auto [x, y, z] : XYZRange(GRID_SIZE)) {
         const Cell& cell = at(x, y, z);
         int neighbours = count_alive_neighbours(x, y, z);
 
@@ -34,7 +36,7 @@ void Grid::step(const SimRules& rule) {
                     updateQueue.push_back(update);
                 }
                 break;
-                
+
             case Dead:
                 if (rule.birth[neighbours]) {
                     Update update{(int)x, (int)y, (int)z, Alive};
@@ -48,7 +50,6 @@ void Grid::step(const SimRules& rule) {
                 updateQueue.push_back(update);
                 break;
         }
-
     }
 
     for (auto& update : updateQueue) {
@@ -91,7 +92,7 @@ int Grid::count_alive_neighbours(int x, int y, int z) const {
     }
 
     assert(count < 27);
-    
+
     return count;
 }
 
@@ -102,4 +103,3 @@ Cell& Grid::at_mut(int x, int y, int z) {
 
     return cells[x + y * GRID_SIZE + z * GRID_SIZE * GRID_SIZE];
 }
-

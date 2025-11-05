@@ -1,5 +1,6 @@
-#include <engine/engine.h>
 #include <engine/camera.h>
+#include <engine/engine.h>
+
 #include "systems.hpp"
 
 int main() {
@@ -17,7 +18,6 @@ int main() {
     engine.addSystem(renderFps);
 
     engine.addSystem(drawGrid);
-
 
     engine.start();
 }
