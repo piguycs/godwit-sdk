@@ -22,11 +22,9 @@ namespace engine {
 
 class ResourceManager {
     std::unordered_map<std::type_index, std::any> resources;
-    // TODO: maybe store some more metadata, to differenciate between:
-    // - systems which dont deal with rendering
-    // - systems which deal with 2D rendering
-    // - systems which deal with 3D rendering
     std::vector<std::function<void()>> systems;
+    std::vector<std::function<void()>> systems2D;
+    std::vector<std::function<void()>> systems3D;
 
 public:
     ResourceManager() = default;
@@ -52,20 +50,12 @@ public:
         systems.push_back(system_wrapper);
     }
 
-    void runOtherSystemsOnce() {
+    void runSystemsOnce() {
         for (auto& system : systems) {
             system();
         }
     }
 
-    /// These systems are meant to be ran within the raylib render context
-    void runRenderSystemsOnce() {
-        for (auto& system : systems) {
-            system();
-        }
-    }
-
-private:
     template<typename T>
     T& getResource() {
         auto it = resources.find(typeid(T));
@@ -77,6 +67,7 @@ private:
         throw std::runtime_error(std::string("Resource not found: ") + typeid(T).name());
     }
 
+private:
     template<typename ArgTuple, typename Func, size_t... Is>
     void callSystemWrapper(Func& func, std::index_sequence<Is...>) {
         auto args_tuple = std::forward_as_tuple(
