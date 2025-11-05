@@ -21,7 +21,8 @@ struct Cell {
 class Grid {
     std::array<Cell, GRID_SIZE_3D> cells;
 
-    std::optional<Cell> at_mut(int x, int y, int z) const;
+    // WILL THROW AN EXCEPTION IF OUT OF BOUNDS, FOR INTERNAL USE ONLY
+    Cell& at_mut(int x, int y, int z);
     
 public:
     Grid();
