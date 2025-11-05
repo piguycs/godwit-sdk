@@ -3,7 +3,7 @@
 #include "src/rules.hpp"
 #include <tl/expected.hpp>
 
-const int GRID_SIZE = 40;
+const int GRID_SIZE = 50;
 const int GRID_SIZE_3D = GRID_SIZE * GRID_SIZE * GRID_SIZE;
 
 enum LifeState {

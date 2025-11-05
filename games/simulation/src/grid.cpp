@@ -49,19 +49,20 @@ void Grid::step(const SimRules& rule) {
                 break;
         }
 
-        for (auto& update : updateQueue) {
-            Cell& cell = at_mut(update.x, update.y, update.z);
-            if (update.life == Alive) {
-                cell.life = Alive;
-                cell.decay = 0;
-            } else if (update.life == Decaying) {
-                if (cell.life != Decaying) {
-                    cell.life = Decaying;
-                    cell.decay = rule.decay_start;
-                } else {
-                    if (cell.decay > 0) cell.decay -= 1;
-                    if (cell.decay == 0) cell.life = Dead;
-                }
+    }
+
+    for (auto& update : updateQueue) {
+        Cell& cell = at_mut(update.x, update.y, update.z);
+        if (update.life == Alive) {
+            cell.life = Alive;
+            cell.decay = 0;
+        } else if (update.life == Decaying) {
+            if (cell.life != Decaying) {
+                cell.life = Decaying;
+                cell.decay = rule.decay_start;
+            } else {
+                if (cell.decay > 0) cell.decay -= 1;
+                if (cell.decay == 0) cell.life = Dead;
             }
         }
     }
