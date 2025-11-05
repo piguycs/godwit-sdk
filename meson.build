@@ -26,5 +26,10 @@ _raylib_proj = cmake.subproject('raylib', options: _raylib_opts)
 # the raylib dependency that our code can depend on
 raylib_dep = _raylib_proj.dependency('raylib')
 
+# this library mimics std::expected from C++23
+_tl_expected_proj = cmake.subproject('expected')
+tl_expected_dep = _tl_expected_proj.dependency('expected')
+
+
 subdir('engine')
 subdir('games/simulation')
