@@ -1,4 +1,5 @@
-#include "engine/engine.h"
+#include <engine/engine.h>
+#include <engine/camera.h>
 #include "grid.hpp"
 #include "rules.hpp"
 
@@ -22,7 +23,7 @@ void drawGrid(engine::RenderCtx3D& ctx, const Grid&) {
     ctx.add<engine::CubeRender>(1, 1, 1, 0, 0, 0);
 }
 
-void rotateCamera(engine::Camera<CAMERA_MAIN>& camera) {
+void rotateCamera(engine::Camera& camera) {
     camera.posX += 0.1f;
     camera.posY += 0.1f;
     camera.posZ += 0.1f;

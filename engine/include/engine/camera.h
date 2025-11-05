@@ -4,7 +4,6 @@ namespace engine {
 
 // each camera needs to have a unique type due to our resource manager
 // so we would use templates for that. I know rust has const geerics, idk c++
-template<int id>
 struct Camera {
     // position
     float posX, posY, posZ;
