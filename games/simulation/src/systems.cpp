@@ -6,8 +6,8 @@ void renderFps(engine::RenderCtx2D& ctx, const Config& cfg) {
     if (cfg.renderFps) ctx.add<engine::FpsRender>(10, 10);
 }
 
-void renderBackground(engine::RenderCtx2D& ctx) {
-    ctx.add<engine::ClearBackgroundRender>();
+void renderBackground(engine::RenderCtx2D& ctx, const Config& cfg) {
+    ctx.add<engine::ClearBackgroundRender>(cfg.backgroundColour);
 }
 
 void stepGridSystem(Grid& grid, const SimRules& rules) {

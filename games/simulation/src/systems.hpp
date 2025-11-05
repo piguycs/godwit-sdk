@@ -12,7 +12,7 @@ struct Config {
 };
 
 void renderFps(engine::RenderCtx2D& ctx, const Config& cfg);
-void renderBackground(engine::RenderCtx2D& ctx);
+void renderBackground(engine::RenderCtx2D& ctx, const Config& cfg);
 void stepGridSystem(Grid& grid, const SimRules& rules);
 void drawGrid(engine::RenderCtx3D& ctx, const Grid&, const Config& cfg);
 void rotateCamera(engine::Camera& camera);

@@ -9,7 +9,8 @@ void FpsRender::renderFunction() {
 
 void ClearBackgroundRender::renderFunction() {
     // OLD COLOUR: Color{130, 130, 252, 255}
-    ClearBackground(BLACK);
+    Color rlColor{colour.r, colour.g, colour.b, 255};
+    ClearBackground(rlColor);
 }
 
 void CubeRender::renderFunction() {

@@ -60,9 +60,9 @@ public:
 };
 
 class ClearBackgroundRender: public IRenderable2D {
-    int r, g, b;
+    RGB colour;
 public:
-    ClearBackgroundRender() {}
+    ClearBackgroundRender(RGB colour): colour(colour) {}
     void renderFunction() override;
 };
 
