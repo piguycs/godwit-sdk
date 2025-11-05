@@ -1,7 +1,6 @@
 #pragma once
 
 #include "src/rules.hpp"
-#include <optional>
 #include <tl/expected.hpp>
 
 const int GRID_SIZE = 50;
