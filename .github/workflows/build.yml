@@ -2,9 +2,9 @@ name: Building Cellular Automata for Windows and Linux
 
 on:
   push:
-    branches: [ main ]
+    branches: [ ecs ]
   pull_request:
-    branches: [ main ]
+    branches: [ ecs ]
 
 jobs:
   build:
