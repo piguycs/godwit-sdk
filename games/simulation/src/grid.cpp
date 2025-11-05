@@ -1,5 +1,6 @@
 #include "grid.hpp"
 
+#include <cassert>
 #include <random>
 #include <stdexcept>
 
