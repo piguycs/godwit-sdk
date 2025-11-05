@@ -1,7 +1,7 @@
-# important to touch one of the meson.build files whenver I add/remove a file
-# still more convinient than manually adding every single .cpp file here
-_engine_globber = run_command('sh', '-c', 'find src -name "*.cpp" | sort', check: true)
-_engine_src = _engine_globber.stdout().strip().split('\n')
+_engine_src = [
+    'src/engine.cpp',
+    'src/renderables.cpp',
+]
 
 _engine_headers = [ include_directories('include') ]
 

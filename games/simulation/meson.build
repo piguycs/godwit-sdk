@@ -9,5 +9,5 @@ executable('simulation', simulation_src,
     dependencies: [engine_dep],
     include_directories: simulation_headers,
     install: true,
-    win_subsystem: 'windows',
+    #win_subsystem: 'windows',
 )
