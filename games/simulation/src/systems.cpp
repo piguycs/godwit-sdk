@@ -14,7 +14,7 @@ void stepGridSystem(Grid& grid, const SimRules& rules) {
     grid.step(rules);
 }
 
-void drawGrid(engine::RenderCtx3D& ctx, const Grid& grid) {
+void drawGrid(engine::RenderCtx3D& ctx, const Grid& grid, const Config& cfg) {
     for (auto [x,y,z] : XYZRange(GRID_SIZE)) {
 
         const Cell& cell = grid.at(x, y, z);
@@ -26,10 +26,10 @@ void drawGrid(engine::RenderCtx3D& ctx, const Grid& grid) {
             engine::RGB colour;
 
             case Alive:
-                colour = {137, 252, 131};
+                colour = cfg.aliveColour;
             // intentional fallthrough
             case Decaying:
-                colour = {252, 145, 131};
+                colour = cfg.decayingColour;
 
                 engine::Position3D position(x, y, z);
                 engine::Scale scale(1, 1, 1);
