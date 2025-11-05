@@ -63,24 +63,22 @@ void Engine::start() {
     while (!WindowShouldClose()) {
         resourceManager.runSystemsOnce();
 
-        // these scopes can easily drop the drawing handles with RAII
-        {
-            DrawingHandle _drawingHandle;
-            auto ctx2d = resourceManager.getResource<engine::RenderCtx2D>();
-            for (auto& renderable : ctx2d.queue) {
-                renderable->renderFunction();
-            }
-            ctx2d.queue.clear();
-
-
-            auto mainCamera = resourceManager.getResource<engine::Camera>();
-            auto ctx3d = resourceManager.getResource<engine::RenderCtx3D>();
-
-            DrawHandle3D _drawHandle3D(getRlCamera(mainCamera));
-            for (auto& renderable : ctx3d.queue) {
-                renderable->renderFunction();
-            }
+        DrawingHandle _drawingHandle;
+        auto& ctx2d = resourceManager.getResource<engine::RenderCtx2D>();
+        for (auto& renderable : ctx2d.queue) {
+            renderable->renderFunction();
         }
+        ctx2d.queue.clear();
+
+
+        auto& mainCamera = resourceManager.getResource<engine::Camera>();
+        auto& ctx3d = resourceManager.getResource<engine::RenderCtx3D>();
+
+        DrawHandle3D _drawHandle3D(getRlCamera(mainCamera));
+        for (auto& renderable : ctx3d.queue) {
+            renderable->renderFunction();
+        }
+        ctx3d.queue.clear();
     }
 }
 
