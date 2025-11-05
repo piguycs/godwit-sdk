@@ -8,11 +8,14 @@ void FpsRender::renderFunction() {
 }
 
 void ClearBackgroundRender::renderFunction() {
-    ClearBackground(Color{130, 130, 252, 255});
+    // OLD COLOUR: Color{130, 130, 252, 255}
+    ClearBackground(BLACK);
 }
 
 void CubeRender::renderFunction() {
-    DrawCube(Vector3{ 0.0f, 0.0f, 0.0f }, 1.0f, 1.0f, 1.0f, RED);
+    Vector3 pos{position.x, position.y, position.z};
+    Color rlColor{colour.r, colour.g, colour.b, 255};
+    DrawCube(pos, scale.width, scale.height, scale.depth, rlColor);
 }
 
 }

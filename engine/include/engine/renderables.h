@@ -1,11 +1,13 @@
 #pragma once
 
+#include <cstdint>
+
 namespace engine {
 
 /*!
 * Red Green Blue colours
 */
-struct RGB{int r,g,b;};
+struct RGB{uint8_t r,g,b;};
 
 /*!
 * Represent coordinates on a 2 dimensional
