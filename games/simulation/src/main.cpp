@@ -9,6 +9,8 @@ int main() {
     engine.registerResource<SimRules>();
     engine.registerResource<Config>();
 
+    engine.addSystem(stepGridSystem);
+
     engine.addSystem(renderBackground);
     engine.addSystem(renderFps);
 

@@ -43,7 +43,7 @@ void drawGrid(engine::RenderCtx3D& ctx, const Grid& grid, const Config& cfg) {
 
 void rotateCamera(engine::Camera& camera) {
     camera.posX += 0.1f;
-    // camera.posY += 0.1f;
+    camera.posY += 0.1f;
     camera.posZ += 0.1f;
 }
 

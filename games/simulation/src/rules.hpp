@@ -11,13 +11,22 @@ using Rule = std::array<bool, 27>;
 
 enum NeighbourMode {
     Moore,
-    VonNeumann,
+    // VonNeumann,
 };
 
 struct SimRules {
     Rule stay;
-    Rule death;
     Rule birth;
 
+    int decay_start;
+
     NeighbourMode neighbour_mode;
+
+    SimRules() {
+        // 4/4/5/M rule
+        stay[4] = true;
+        birth[4] = true;
+        decay_start = 5;
+        neighbour_mode = Moore;
+    }
 };
