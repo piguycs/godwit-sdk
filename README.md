@@ -4,6 +4,8 @@ An ECS-driven game development SDK for C++17
 ## Getting started
 This project uses C++17 along with Meson to compile everything.
 
+If you just want to check out the example game, you can fetch the latest build artifact from: https://nightly.link/piguycs/godwit-sdk/workflows/build/ecs?preview
+
 ### Dependencies
 This project depends on `raylib`. The dependency is vendored using [git submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules). You do not need to have it installed locally for this project to compile.
 
