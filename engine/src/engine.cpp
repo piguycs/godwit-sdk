@@ -73,7 +73,7 @@ void Engine::start() {
         DrawingHandle _drawingHandle;
         auto& ctx2d = resourceManager.getResource<engine::RenderCtx2D>();
 
-        // we render all the immediate 2D renderables, but deferred ones (like FPS) are put to the end
+        // we render all the immediate 2D renderables, but deferred ones are put to the end
         for (auto& renderable : ctx2d.queue) {
             if (renderable->shouldDefer()) {
                 deferred2D.push_back(renderable);
