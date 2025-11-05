@@ -1,7 +1,7 @@
 #include "engine/engine.h"
 #include "engine/camera.h"
 #include "engine/renderables.h"
-#include "raylib.h"
+#include <raylib.h>
 #include <memory>
 
 // easy handle so that we use RAII for the begin/end drawing

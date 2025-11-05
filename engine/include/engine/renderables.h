@@ -58,6 +58,17 @@ public:
     void renderFunction() override;
 };
 
+class CubeWiresRender: public IRenderable3D {
+    Scale scale;
+    Position3D position;
+    RGB colour;
+public:
+    CubeWiresRender(Scale scale, Position3D position, RGB colour)
+        : scale(scale), position(position), colour(colour) {}
+
+    void renderFunction() override;
+};
+
 class FpsRender: public IRenderable2D {
     int x, y;
 

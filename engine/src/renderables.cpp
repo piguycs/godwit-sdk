@@ -24,4 +24,11 @@ void CubeRender::renderFunction() {
     DrawCube(pos, scale.width, scale.height, scale.depth, rlColor);
 }
 
+void CubeWiresRender::renderFunction() {
+    Vector3 pos{position.x, position.y, position.z};
+    Color rlColor{colour.r, colour.g, colour.b, 255};
+    DrawCubeWires(pos, scale.width, scale.height, scale.depth, rlColor);
+}
+
+
 }
