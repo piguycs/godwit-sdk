@@ -5,84 +5,88 @@
 namespace engine {
 
 /*!
-* Red Green Blue colours
-*/
-struct RGB{uint8_t r,g,b;};
+ * Red Green Blue colours
+ */
+struct RGB {
+    uint8_t r, g, b;
+};
 
 /*!
-* Represent coordinates on a 2 dimensional
-*/
-struct Position2D {float x, y;};
+ * Represent coordinates on a 2 dimensional
+ */
+struct Position2D {
+    float x, y;
+};
 
 /*!
-* Represent coordinates on a 3 dimensional
-*/
+ * Represent coordinates on a 3 dimensional
+ */
 struct Position3D {
     float x, y, z;
     Position3D(float x, float y, float z) : x(x), y(y), z(z) {}
 };
 
-struct Scale{
+struct Scale {
     float width, height, depth;
-    Scale(float width, float height, float depth)
-        : width(width), height(height), depth(depth) {}
+    Scale(float width, float height, float depth) : width(width), height(height), depth(depth) {}
 };
 
 class IRenderable2D {
-public:
+   public:
     /*
-    * Defers a 2D renderable to render at the end of a frame
-    */
-    virtual bool shouldDefer()  {
-        return false;
-    }
+     * Defers a 2D renderable to render at the end of a frame
+     */
+    virtual bool shouldDefer() { return false; }
 
     virtual void renderFunction() = 0;
     virtual ~IRenderable2D() = default;
 };
 
 class IRenderable3D {
-public:
+   public:
     virtual void renderFunction() = 0;
     virtual ~IRenderable3D() = default;
 };
 
-class CubeRender: public IRenderable3D {
+class CubeRender : public IRenderable3D {
     Scale scale;
     Position3D position;
     RGB colour;
-public:
+
+   public:
     CubeRender(Scale scale, Position3D position, RGB colour)
         : scale(scale), position(position), colour(colour) {}
 
     void renderFunction() override;
 };
 
-class CubeWiresRender: public IRenderable3D {
+class CubeWiresRender : public IRenderable3D {
     Scale scale;
     Position3D position;
     RGB colour;
-public:
+
+   public:
     CubeWiresRender(Scale scale, Position3D position, RGB colour)
         : scale(scale), position(position), colour(colour) {}
 
     void renderFunction() override;
 };
 
-class FpsRender: public IRenderable2D {
+class FpsRender : public IRenderable2D {
     int x, y;
 
-public:
-    FpsRender(int x, int y): x(x), y(y) {}
+   public:
+    FpsRender(int x, int y) : x(x), y(y) {}
     bool shouldDefer() override;
     void renderFunction() override;
 };
 
-class ClearBackgroundRender: public IRenderable2D {
+class ClearBackgroundRender : public IRenderable2D {
     RGB colour;
-public:
-    ClearBackgroundRender(RGB colour): colour(colour) {}
+
+   public:
+    ClearBackgroundRender(RGB colour) : colour(colour) {}
     void renderFunction() override;
 };
 
-}
+}  // namespace engine

@@ -1,16 +1,12 @@
 #include "engine/renderables.h"
+
 #include <raylib.h>
 
 namespace engine {
 
+bool FpsRender::shouldDefer() { return true; }
 
-bool FpsRender::shouldDefer() {
-    return true;
-}
-
-void FpsRender::renderFunction() {
-    DrawFPS(x, y);
-}
+void FpsRender::renderFunction() { DrawFPS(x, y); }
 
 void ClearBackgroundRender::renderFunction() {
     // OLD COLOUR: Color{130, 130, 252, 255}
@@ -30,5 +26,4 @@ void CubeWiresRender::renderFunction() {
     DrawCubeWires(pos, scale.width, scale.height, scale.depth, rlColor);
 }
 
-
-}
+}  // namespace engine

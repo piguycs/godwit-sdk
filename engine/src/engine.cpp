@@ -1,8 +1,11 @@
 #include "engine/engine.h"
+
+#include <raylib.h>
+
+#include <memory>
+
 #include "engine/camera.h"
 #include "engine/renderables.h"
-#include <raylib.h>
-#include <memory>
 
 // easy handle so that we use RAII for the begin/end drawing
 // should also help if any of the systems throw an exception? (would need to test)
@@ -24,10 +27,10 @@ struct WindowHandle {
 };
 
 Camera3D getRlCamera(const engine::Camera& mainCamera) {
-    Camera3D camera; 
-    camera.position = { mainCamera.posX, mainCamera.posY, mainCamera.posZ };
-    camera.target = { mainCamera.targetX, mainCamera.targetY, mainCamera.targetZ };
-    camera.up = { mainCamera.upX, mainCamera.upY, mainCamera.upZ };
+    Camera3D camera;
+    camera.position = {mainCamera.posX, mainCamera.posY, mainCamera.posZ};
+    camera.target = {mainCamera.targetX, mainCamera.targetY, mainCamera.targetZ};
+    camera.up = {mainCamera.upX, mainCamera.upY, mainCamera.upZ};
     camera.fovy = mainCamera.fovy;
     camera.projection = CAMERA_PERSPECTIVE;
 
@@ -91,7 +94,6 @@ void Engine::start() {
             ctx3d.queue.clear();
         }
 
-
         // render all the deferred renderables
         for (auto& renderable : deferred2D) renderable->renderFunction();
 
@@ -100,4 +102,4 @@ void Engine::start() {
     }
 }
 
-}
+}  // namespace engine

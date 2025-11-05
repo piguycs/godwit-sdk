@@ -14,7 +14,7 @@ template <typename F>
 struct FunctionTraits;
 
 template <typename ReturnType, typename... Args>
-struct FunctionTraits<ReturnType(*)(Args...)> {
+struct FunctionTraits<ReturnType (*)(Args...)> {
     using ArgTuple = std::tuple<Args...>;
 };
 
@@ -26,32 +26,30 @@ namespace engine {
  * Register resources, which are indexed using their type ID. If multiple
  * resources share the same type (eg int p1Score and int p2Score), encapsulate
  * them in different structs. (struct P1{int score;}; struct P2{int score;};)
-*/
+ */
 class ResourceManager {
     std::unordered_map<std::type_index, std::any> resources;
     std::vector<std::function<void()>> systems;
     std::vector<std::function<void()>> systems2D;
     std::vector<std::function<void()>> systems3D;
 
-public:
+   public:
     ResourceManager() = default;
     ~ResourceManager() = default;
 
-    template<typename T, typename... Args>
+    template <typename T, typename... Args>
     void registerResource(Args&&... args) {
         resources.emplace(typeid(T), T(std::forward<Args>(args)...));
     }
 
-    template<typename Func>
-    void addSystem(Func&& func)  {
+    template <typename Func>
+    void addSystem(Func&& func) {
         using Traits = FunctionTraits<std::decay_t<Func>>;
         using ArgTuple = typename Traits::ArgTuple;
 
-        auto system_wrapper = [this, func=std::forward<Func>(func)]() mutable {
-            callSystemWrapper<ArgTuple>(
-                func,
-                std::make_index_sequence<std::tuple_size_v<ArgTuple>>{}
-            );
+        auto system_wrapper = [this, func = std::forward<Func>(func)]() mutable {
+            callSystemWrapper<ArgTuple>(func,
+                                        std::make_index_sequence<std::tuple_size_v<ArgTuple>>{});
         };
 
         systems.push_back(system_wrapper);
@@ -63,7 +61,7 @@ public:
         }
     }
 
-    template<typename T>
+    template <typename T>
     T& getResource() {
         auto it = resources.find(typeid(T));
 
@@ -74,15 +72,14 @@ public:
         throw std::runtime_error(std::string("Resource not found: ") + typeid(T).name());
     }
 
-private:
-    template<typename ArgTuple, typename Func, size_t... Is>
+   private:
+    template <typename ArgTuple, typename Func, size_t... Is>
     void callSystemWrapper(Func& func, std::index_sequence<Is...>) {
         auto args_tuple = std::forward_as_tuple(
-            getResource<std::remove_reference_t<std::tuple_element_t<Is, ArgTuple>>>()...
-        );
+            getResource<std::remove_reference_t<std::tuple_element_t<Is, ArgTuple>>>()...);
 
         std::apply(func, args_tuple);
     }
 };
 
-}
+}  // namespace engine

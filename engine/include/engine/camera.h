@@ -31,4 +31,4 @@ struct Camera {
 
 };
 
-}
+}  // namespace engine
