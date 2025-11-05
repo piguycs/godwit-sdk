@@ -30,6 +30,13 @@ struct Scale{
 
 class IRenderable2D {
 public:
+    /*
+    * Defers a 2D renderable to render at the end of a frame
+    */
+    virtual bool shouldDefer()  {
+        return false;
+    }
+
     virtual void renderFunction() = 0;
     virtual ~IRenderable2D() = default;
 };
@@ -56,6 +63,7 @@ class FpsRender: public IRenderable2D {
 
 public:
     FpsRender(int x, int y): x(x), y(y) {}
+    bool shouldDefer() override;
     void renderFunction() override;
 };
 

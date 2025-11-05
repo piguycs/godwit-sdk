@@ -3,6 +3,11 @@
 
 namespace engine {
 
+
+bool FpsRender::shouldDefer() {
+    return true;
+}
+
 void FpsRender::renderFunction() {
     DrawFPS(x, y);
 }

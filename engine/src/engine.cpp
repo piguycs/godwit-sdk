@@ -1,6 +1,8 @@
 #include "engine/engine.h"
 #include "engine/camera.h"
+#include "engine/renderables.h"
 #include "raylib.h"
+#include <memory>
 
 // easy handle so that we use RAII for the begin/end drawing
 // should also help if any of the systems throw an exception? (would need to test)
@@ -60,25 +62,41 @@ void Engine::start() {
     WindowHandle _windowHandle(800, 450, "Godwit SDK (ECS) game");
     SetTargetFPS(60);
 
+    std::vector<std::shared_ptr<engine::IRenderable2D>> deferred2D;
+
     while (!WindowShouldClose()) {
         resourceManager.runSystemsOnce();
 
         DrawingHandle _drawingHandle;
         auto& ctx2d = resourceManager.getResource<engine::RenderCtx2D>();
-        for (auto& renderable : ctx2d.queue) {
-            renderable->renderFunction();
-        }
-        ctx2d.queue.clear();
 
+        // we render all the immediate 2D renderables, but deferred ones (like FPS) are put to the end
+        for (auto& renderable : ctx2d.queue) {
+            if (renderable->shouldDefer()) {
+                deferred2D.push_back(renderable);
+            } else {
+                renderable->renderFunction();
+            }
+        }
 
         auto& mainCamera = resourceManager.getResource<engine::Camera>();
         auto& ctx3d = resourceManager.getResource<engine::RenderCtx3D>();
 
-        DrawHandle3D _drawHandle3D(getRlCamera(mainCamera));
-        for (auto& renderable : ctx3d.queue) {
-            renderable->renderFunction();
+        {
+            DrawHandle3D _drawHandle3D(getRlCamera(mainCamera));
+
+            // all the 3D renderables are rendered over here
+            for (auto& renderable : ctx3d.queue) renderable->renderFunction();
+
+            ctx3d.queue.clear();
         }
-        ctx3d.queue.clear();
+
+
+        // render all the deferred renderables
+        for (auto& renderable : deferred2D) renderable->renderFunction();
+
+        deferred2D.clear();
+        ctx2d.queue.clear();
     }
 }
 
